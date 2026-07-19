@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=yes" />
+  <title>阿凌 · 招聘智能体数字人</title>
+  <style>
+    :root {
+      --ink: #0a0e1a;
+      --ink-2: #12182b;
+      --paper: #f5f7fb;
+      --white: #fff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e6eaf2;
+      --indigo: #4f46e5;
+      --indigo-2: #6366f1;
+      --violet: #8b5cf6;
+      --indigo-bg: #eef2ff;
+      --grad: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      --green: #059669;
+      --green-bg: #ecfdf5;
+      --amber-bg: #fffbeb;
+      --amber: #b45309;
+      --font: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --r: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(78px + var(--safe-b));
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 14, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav-brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .nav-cta {
+      background: var(--grad);
+      color: #fff !important;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--ink);
+      color: #fff;
+      padding: 28px 20px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 0%, rgba(99,102,241,0.35), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(139,92,246,0.2), transparent 50%);
+      pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #a5b4fc;
+      background: rgba(99,102,241,0.2);
+      border: 1px solid rgba(165,180,252,0.25);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .hero-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .hero-steps span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #c7d2fe;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 11px;
+      border-radius: 999px;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+    }
+    .btn-fill {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(99,102,241,0.45);
+    }
+    .btn-line {
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    /* SECTION */
+    .sec { padding: 40px 20px; }
+    .sec--white { background: var(--white); }
+    .sec--ink { background: var(--ink); color: #fff; }
+    .sec-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--indigo);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .sec--ink .sec-label { color: #a5b4fc; }
+    .sec h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .sec .desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+    .sec--ink .desc { color: #94a3b8; }
+
+    /* PROOF NUMS */
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: -18px;
+      padding: 0 16px 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .proof-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(12,18,34,0.08);
+    }
+    .proof-card strong {
+      display: block;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--indigo);
+      margin-bottom: 2px;
+    }
+    .proof-card span {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* 三种方式 */
+    .ways { display: flex; flex-direction: column; gap: 10px; }
+    .way {
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 16px;
+      background: var(--paper);
+    }
+    .way--new {
+      background: linear-gradient(145deg, #eef2ff, #f5f3ff);
+      border-color: #c7d2fe;
+    }
+    .way-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .way-top em {
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .way--new .way-top em { color: var(--indigo); }
+    .way-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--grad);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .way h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .way p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: var(--white);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      min-width: 420px;
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+    th {
+      background: var(--ink);
+      color: #cbd5e1;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+    th:first-child, td:first-child {
+      font-weight: 700;
+      color: var(--text);
+      background: var(--paper);
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      min-width: 72px;
+    }
+    th:first-child { background: #1e293b; color: #fff; z-index: 2; }
+    th.col-hl, td.col-hl {
+      background: var(--indigo-bg);
+      color: var(--indigo);
+      font-weight: 600;
+    }
+    th.col-hl { background: #4338ca; color: #fff; }
+    tr:last-child td { border-bottom: none; }
+
+    /* SCENARIO */
+    .scene {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 18px 16px;
+      margin-bottom: 12px;
+    }
+    .scene:last-child { margin-bottom: 0; }
+    .scene-n {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 6px;
+    }
+    .scene h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .scene-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .scene-row em {
+      display: block;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .scene-row p {
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* EFFECT */
+    .effect {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .effect-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .effect-card strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+    .effect-card span { font-size: 11px; color: #94a3b8; }
+
+    /* CASE */
+    .case {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(12,18,34,0.05);
+    }
+    .case:last-child { margin-bottom: 0; }
+    .case-head {
+      padding: 14px 16px;
+      background: var(--ink-2);
+      color: #fff;
+    }
+    .case-head .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #a5b4fc;
+      background: rgba(99,102,241,0.25);
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .case-head h3 {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .case-body { padding: 16px; }
+    .case-body .blk { margin-bottom: 12px; }
+    .case-body .blk em {
+      display: block;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .case-body .blk p {
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.65;
+    }
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .case-metrics div {
+      background: var(--paper);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+    .case-metrics strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--indigo);
+    }
+    .case-metrics span {
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .case-quote {
+      background: var(--indigo-bg);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: #3730a3;
+      line-height: 1.65;
+    }
+    .case-quote footer {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #6366f1;
+      text-align: left;
+      padding: 0;
+    }
+
+    /* ADV */
+    .adv-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .adv {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 16px;
+    }
+    .adv h3 {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .adv p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* FLOW */
+    .flow { display: flex; flex-direction: column; gap: 0; }
+    .flow-item {
+      display: flex;
+      gap: 14px;
+      padding-bottom: 18px;
+      position: relative;
+    }
+    .flow-item:last-child { padding-bottom: 0; }
+    .flow-item:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 32px;
+      bottom: 0;
+      width: 2px;
+      background: #c7d2fe;
+    }
+    .flow-n {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .flow-item h3 { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+    .flow-item p { font-size: 12px; color: var(--muted); }
+
+    /* FAQ */
+    .faq details {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+    }
+    .faq summary {
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      color: var(--indigo);
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .faq details[open] summary::after { content: "−"; }
+    .faq details p {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* CTA */
+    .cta-box {
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+    .cta-box h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .cta-box .desc { margin-bottom: 18px; }
+    .cta-phone {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: #a5b4fc;
+      letter-spacing: 0.03em;
+      margin: 8px auto 6px;
+    }
+    .cta-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .shot {
+      border-radius: var(--r);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-top: 8px;
+    }
+    .shot img { width: 100%; }
+    .shot-cap {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .page-foot {
+      text-align: center;
+      padding: 16px 20px 24px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* DOCK */
+    .dock {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 99;
+      padding: 10px 16px calc(10px + var(--safe-b));
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .dock-info { flex: 1; min-width: 0; }
+    .dock-info strong { display: block; font-size: 13px; }
+    .dock-info span { font-size: 11px; color: var(--muted); }
+    .dock-call {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--grad);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 20px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* 电话弹窗 */
+    .phone-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .phone-modal.is-open { display: flex; }
+    .phone-modal__mask {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 14, 26, 0.65);
+      backdrop-filter: blur(4px);
+    }
+    .phone-modal__card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 340px;
+      background: var(--white);
+      border-radius: 18px;
+      padding: 28px 22px 22px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      animation: popIn 0.22s ease;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92) translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    .phone-modal__card h3 {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .phone-modal__name {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .phone-modal__num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--indigo);
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+      user-select: all;
+    }
+    .phone-modal__qr {
+      width: 168px;
+      height: 168px;
+      margin: 0 auto 14px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .phone-modal__qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .phone-modal__wx {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .cta-qr {
+      width: 140px;
+      height: 140px;
+      margin: 16px auto 8px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: #fff;
+    }
+    .cta-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .cta-wx-tip {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    .phone-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .phone-modal__actions .btn {
+      width: 100%;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .phone-modal__close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .nav-cta, .js-phone {
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-brand" href="#top">
+      <img src="assets/brand/icon.svg" alt="" />
+      阿凌 · 招聘智能体数字人
+    </a>
+    <button type="button" class="nav-cta js-phone">电话咨询</button>
+  </nav>
+
+  <!-- Hero：对标小瓦「一句话价值 + 漏斗步骤 + CTA」 -->
+  <header class="hero" id="top">
+    <div class="hero-badge">给负责人 · 招聘效率方案</div>
+    <h1>用 AI 把简历初筛做完<br/>HR 只聊<em>对的人</em></h1>
+    <p class="hero-sub">
+      用户（候选人）正在投递、被筛选、要催简历时——
+      <strong style="color:#e2e8f0;">阿凌</strong> 帮你把重复劳动做掉，把高匹配人推到面前。
+    </p>
+    <div class="hero-steps">
+      <span>1 批量上传</span>
+      <span>2 AI 评分排序</span>
+      <span>3 约面 / Boss 跟进</span>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-fill js-phone">预约演示</button>
+      <a class="btn btn-line" href="#cases">看真实场景</a>
+    </div>
+  </header>
+
+  <!-- 社会证明数字 -->
+  <div class="proof">
+    <div class="proof-card">
+      <strong>分钟级</strong>
+      <span>批量上传<br/>出匹配排序</span>
+    </div>
+    <div class="proof-card">
+      <strong>多岗</strong>
+      <span>一份简历<br/>自动分配最优岗</span>
+    </div>
+    <div class="proof-card">
+      <strong>本地</strong>
+      <span>数据不出机器<br/>可管控</span>
+    </div>
+  </div>
+
+  <!-- 核心认知：对标「第三种增长方式」 -->
+  <section class="sec sec--white" id="cognition">
+    <div class="sec-label">核心认知</div>
+    <h2>第三种招人方式</h2>
+    <p class="desc">加人堆人、纯靠人力硬筛、盲目买 SaaS——都贵。阿凌走第三条路：用 AI 把初筛链路自动化。</p>
+    <div class="ways">
+      <article class="way">
+        <div class="way-top"><em>第一种</em></div>
+        <h3>堆人硬筛</h3>
+        <p>加人、开 PDF、填 Excel。简历一多就加班，进度看不见，招不到还背锅。</p>
+      </article>
+      <article class="way">
+        <div class="way-top"><em>第二种</em></div>
+        <h3>只加渠道不加效率</h3>
+        <p>Boss、内推源源不断进简历，但初筛跟不上——流量在涨，到面率不涨。</p>
+      </article>
+      <article class="way way--new">
+        <div class="way-top">
+          <em>第三种 — 新路径</em>
+          <span class="way-badge">阿凌</span>
+        </div>
+        <h3>决策前先筛清</h3>
+        <p>批量上传 → AI 按岗位硬性/软性要求打分 → 高匹配优先聊；Boss 侧自动催简历、收附件评分。人只做该人做的事。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 对比表：对标小瓦增长方式对比 -->
+  <section class="sec" id="compare">
+    <div class="sec-label">方式对比</div>
+    <h2>阿凌 vs 传统做法</h2>
+    <p class="desc">左右滑查看完整对比。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-hl">阿凌</th>
+            <th>手工初筛</th>
+            <th>加人堆人</th>
+            <th>纯云端 SaaS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>锁定什么</td>
+            <td class="col-hl">高匹配候选人</td>
+            <td>按时间顺序翻</td>
+            <td>用人力换速度</td>
+            <td>看平台功能</td>
+          </tr>
+          <tr>
+            <td>日常形态</td>
+            <td class="col-hl">上传即排序 / Boss 守护</td>
+            <td>开 PDF + Excel</td>
+            <td>多招专员</td>
+            <td>浏览器登录协作</td>
+          </tr>
+          <tr>
+            <td>见效速度</td>
+            <td class="col-hl">当天可用</td>
+            <td>永远在赶</td>
+            <td>招人要周期</td>
+            <td>注册即用，数据在云</td>
+          </tr>
+          <tr>
+            <td>成本结构</td>
+            <td class="col-hl">工具换人效</td>
+            <td>加班 + 机会成本</td>
+            <td>薪资刚性上涨</td>
+            <td>按席位 / 年费</td>
+          </tr>
+          <tr>
+            <td>数据位置</td>
+            <td class="col-hl">本地私有化</td>
+            <td>网盘 / 本机乱放</td>
+            <td>跟人走</td>
+            <td>第三方服务器</td>
+          </tr>
+          <tr>
+            <td>结果可复盘</td>
+            <td class="col-hl">分数 + Excel 导出</td>
+            <td>靠感觉</td>
+            <td>难量化</td>
+            <td>看后台报表</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 适合场景：对标「产品·现场·动作」 -->
+  <section class="sec sec--white" id="scenes">
+    <div class="sec-label">产品 &amp; 场景</div>
+    <h2>适合什么样的团队</h2>
+    <p class="desc">有现场、能承接——初筛忙不过来，又有人要跟候选人聊。</p>
+
+    <article class="scene">
+      <div class="scene-n">场景 1 · 多岗齐开型</div>
+      <h3>中小企业同时招 3～5 个岗</h3>
+      <div class="scene-grid">
+        <div class="scene-row">
+          <em>你的现场</em>
+          <p>运营、客服、销售、工程师一起要人；简历混在一起，错投漏投是常态。</p>
+        </div>
+        <div class="scene-row">
+          <em>阿凌动作</em>
+          <p>一份简历对照全部岗位打分，标出「最合适投哪个」；高分直接进邀约。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-n">场景 2 · Boss 消息爆炸型</div>
+      <h3>招聘专员一天私信几十条</h3>
+      <div class="scene-grid">
+        <div class="scene-row">
+          <em>你的现场</em>
+          <p>「还招吗？」「发我 JD」「简历发你了」——切窗口回消息，初筛永远做不完。</p>
+        </div>
+        <div class="scene-row">
+          <em>阿凌动作</em>
+          <p>Boss 助手守护：自动回、催简历、收附件评分。人只跟高匹配深聊。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-n">场景 3 · 数据要留在本地型</div>
+      <h3>对简历敏感、不愿上云</h3>
+      <div class="scene-grid">
+        <div class="scene-row">
+          <em>你的现场</em>
+          <p>老板明确：候选人信息不能随便丢外部平台；又想要 AI 提效。</p>
+        </div>
+        <div class="scene-row">
+          <em>阿凌动作</em>
+          <p>Windows 本地部署（Web / 桌面版），简历与评分结果留在自己机器上。</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 增长效果数字 -->
+  <section class="sec sec--ink" id="effect">
+    <div class="sec-label">效率效果</div>
+    <h2>把「半天主筛」压成「上传即结果」</h2>
+    <p class="desc">团队节奏、简历量不同，量级会有差异——方向是一致的：人效上去，漏人变少。</p>
+    <div class="effect">
+      <div class="effect-card">
+        <strong>半天→分钟</strong>
+        <span>初筛出排序的时间</span>
+      </div>
+      <div class="effect-card">
+        <strong>1 人扛多岗</strong>
+        <span>智能分配少猜少漏</span>
+      </div>
+      <div class="effect-card">
+        <strong>Boss 不断档</strong>
+        <span>守护自动催 / 收简历</span>
+      </div>
+      <div class="effect-card">
+        <strong>可导出</strong>
+        <span>分数与名单给老板看</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 真实案例：对标小瓦「卡点 / 怎么干 / 数字 / 口述」 -->
+  <section class="sec sec--white" id="cases">
+    <div class="sec-label">案例</div>
+    <h2>真实场景，真实节奏</h2>
+    <p class="desc">以下为场景化软文案例，数字按同类团队量级整理，便于对号入座。</p>
+
+    <article class="case">
+      <div class="case-head">
+        <span class="tag">电商 / 运营侧</span>
+        <h3>某 20 人电商团队 · 大促前 5 岗齐招</h3>
+      </div>
+      <div class="case-body">
+        <div class="blk">
+          <em>卡点</em>
+          <p>HR 只一个人，Boss 日均私信 40+；用人部门周五要到面，名单凑不齐一半。</p>
+        </div>
+        <div class="blk">
+          <em>我们怎么干</em>
+          <p>五岗要求先进系统 → 简历批量「智能分配」→ Boss 开守护催简历评分 → HR 只聊 80 分以上。</p>
+        </div>
+        <div class="case-metrics">
+          <div><strong>5 岗</strong><span>并行不乱</span></div>
+          <div><strong>≤0.5h</strong><span>每日整理结果</span></div>
+          <div><strong>当天</strong><span>出高匹配名单</span></div>
+        </div>
+        <div class="case-quote">
+          「以前加班到 11 点还在回『还招吗』。现在名单能甩给业务——终于不用天天被催。」
+          <footer>— 招聘专员（口述整理 · 脱敏）</footer>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-head">
+        <span class="tag">科技 / 产品岗</span>
+        <h3>某 40 人科技公司 · 产品经理 200 份简历</h3>
+      </div>
+      <div class="case-body">
+        <div class="blk">
+          <em>卡点</em>
+          <p>按投递时间顺序翻，真正对口的简历埋在中间；电话打过去，人已接了别家 offer。老板说：「不是没人，是我们筛慢了。」</p>
+        </div>
+        <div class="blk">
+          <em>我们怎么干</em>
+          <p>上传按匹配度置顶 → 详情看未达标项 → 达标批量发面试邀请，流程不断档。</p>
+        </div>
+        <div class="case-metrics">
+          <div><strong>~200</strong><span>份简历进池</span></div>
+          <div><strong>置顶</strong><span>高分优先聊</span></div>
+          <div><strong>一键</strong><span>发面试邮件</span></div>
+        </div>
+        <div class="case-quote">
+          「开会讨论终于有分数，不是『我觉得还行』。该先打谁，一眼就定。」
+          <footer>— 负责人（口述整理 · 脱敏）</footer>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-head">
+        <span class="tag">外贸 / 数据敏感</span>
+        <h3>某外贸企业 · 简历必须留在公司侧</h3>
+      </div>
+      <div class="case-body">
+        <div class="blk">
+          <em>卡点</em>
+          <p>想买在线筛选工具，卡在「数据出公司」；网盘 + Excel 协作乱版本，老板放心不了。</p>
+        </div>
+        <div class="blk">
+          <em>我们怎么干</em>
+          <p>本地安装 Web / 桌面版；筛选、分配、导出一套闭环，合规问询好回答。</p>
+        </div>
+        <div class="case-metrics">
+          <div><strong>本地</strong><span>私有化部署</span></div>
+          <div><strong>Excel</strong><span>进度可交差</span></div>
+          <div><strong>0</strong><span>简历上第三方云</span></div>
+        </div>
+        <div class="case-quote">
+          「不是功能不够，是能不能装进来。阿凌这关过了，效率工具才真正用得上。」
+          <footer>— 管理侧（口述整理 · 脱敏）</footer>
+        </div>
+      </div>
+    </article>
+    <p class="note">※ 案例为场景化说明，效果因简历量、岗位难度、团队配合不同而异。</p>
+  </section>
+
+  <!-- 界面证据 -->
+  <section class="sec" id="product">
+    <div class="sec-label">产品界面</div>
+    <h2>上传完，长这样</h2>
+    <p class="desc">匹配度排好了，谁该优先打电话，不用靠感觉。</p>
+    <div class="shot">
+      <img src="screenshots/ui_screening.png" alt="阿凌简历筛选" />
+    </div>
+    <p class="shot-cap">匹配度进度条 · 推荐岗位标签 · 可导出 Excel</p>
+  </section>
+
+  <!-- 优势：对标「你做产品，我们猎人」 -->
+  <section class="sec sec--white" id="adv">
+    <div class="sec-label">阿凌优势</div>
+    <h2>你定岗位，我们帮你「筛」人</h2>
+    <p class="desc">结果可量化、可验证、可追责——不只是好看的功能列表。</p>
+    <div class="adv-grid">
+      <article class="adv">
+        <h3>AI 精准打分</h3>
+        <p>按硬性 / 软性要求与权重打分，只把高匹配推到前面——不浪费 HR 一通电话。</p>
+      </article>
+      <article class="adv">
+        <h3>多岗智能分配</h3>
+        <p>一份简历对比全部岗位，标出最优投向，少错投、少部门扯皮。</p>
+      </article>
+      <article class="adv">
+        <h3>Boss 7×24 可守护</h3>
+        <p>自动回、催简历、收附件评分，专员不用全天钉在聊天框。</p>
+      </article>
+      <article class="adv">
+        <h3>本地可控</h3>
+        <p>数据默认在自己机器上；进度可导出，周会有数可讲。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 合作流程：对标 3-7 天流程 -->
+  <section class="sec" id="flow">
+    <div class="sec-label">上手流程</div>
+    <h2>从咨询到看见结果，很快</h2>
+    <p class="desc">典型路径：当天能看清适不适合你们。</p>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-n">1</div>
+        <div>
+          <h3>电话 / 微信沟通</h3>
+          <p>说清招几个岗、简历从哪来、有没有 Boss 痛点</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-n">2</div>
+        <div>
+          <h3>远程演示</h3>
+          <p>传几份真实简历，当场看评分排序与分配</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-n">3</div>
+        <div>
+          <h3>本地部署试用</h3>
+          <p>装到你们 Windows 上跑，数据留在公司侧</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-n">4</div>
+        <div>
+          <h3>纳入日常</h3>
+          <p>岗位配置固化、Boss 守护打开、周会看导出报表</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec sec--white" id="faq">
+    <div class="sec-label">常见问题</div>
+    <h2>负责人通常会问这些</h2>
+    <div class="faq">
+      <details>
+        <summary>阿凌是怎么帮团队省人力的？</summary>
+        <p>把「开 PDF → 对照 JD → 记分 → 填表 → 回 Boss」压成「上传 → 自动排序 → 守护跟进」。同样一个人，能跟进更多高匹配候选人，而不是先加人。</p>
+      </details>
+      <details>
+        <summary>数据安全怎么样？会不会上传到外部平台？</summary>
+        <p>默认本地部署。简历解析与评分在你们环境内完成，适合对简历敏感、不愿上云的团队。具体网络与 API 配置可在演示时说明。</p>
+      </details>
+      <details>
+        <summary>会不会把所有人都刷成高分？</summary>
+        <p>不会。按岗位硬性 / 软性要求与权重打分，详情里能看技能亮点与未达标项；管理侧也可导出结果复盘，而不是黑箱。</p>
+      </details>
+      <details>
+        <summary>Boss 自动回复会不会像机器人？</summary>
+        <p>可配置正式 / 轻松 / 自定义语气；支持每日上限与间隔，避免失控群发。演示时可按你们话术试一轮。</p>
+      </details>
+      <details>
+        <summary>第一次怎么验证值不值得上？</summary>
+        <p>建议先远程演示：拿最近真实投递的一批简历跑通排序与导出。效果对得上你们节奏，再谈部署与日常使用。</p>
+      </details>
+      <details>
+        <summary>怎么衡量有没有用？</summary>
+        <p>看三件事：初筛是否还加班、高匹配是否更快进到面、Boss 私信是否还占满白天。报表可导出，便于周会对齐。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 最终 CTA：对标小瓦底部预约 -->
+  <section class="sec sec--ink" id="contact">
+    <div class="cta-box">
+      <div class="sec-label">准备好验证了吗？</div>
+      <h2>用 AI 把初筛做完<br/>HR 只聊对的人</h2>
+      <p class="desc">本地可部署 · 多岗可分配 · Boss 可守护 · 典型当天能看清效果</p>
+      <div class="cta-name">小万</div>
+      <div class="cta-qr">
+        <img src="assets/wechat-qrcode-xiaowan.png" alt="微信二维码" />
+      </div>
+      <p class="cta-wx-tip">微信扫码添加 · 或电话咨询</p>
+      <button type="button" class="cta-phone js-phone" style="background:none;border:none;cursor:pointer;font-family:inherit;width:100%;text-align:center;display:block;">18458329398</button>
+      <div class="hero-actions" style="justify-content:center;margin-top:16px;">
+        <button type="button" class="btn btn-fill js-phone">立即电话咨询</button>
+        <a class="btn btn-line" href="#cases">再看一遍案例</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    © 阿凌 · 招聘智能体数字人
+  </footer>
+
+  <div class="dock">
+    <div class="dock-info">
+      <strong>小万 · 电话 / 微信</strong>
+      <span>点击右侧查看联系方式</span>
+    </div>
+    <button type="button" class="dock-call js-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      电话咨询
+    </button>
+  </div>
+
+  <!-- 电话弹窗 -->
+  <div class="phone-modal" id="phoneModal" aria-hidden="true">
+    <div class="phone-modal__mask" data-close></div>
+    <div class="phone-modal__card" role="dialog" aria-labelledby="phoneTitle">
+      <button type="button" class="phone-modal__close" data-close aria-label="关闭">×</button>
+      <h3 id="phoneTitle">联系小万</h3>
+      <div class="phone-modal__name">微信扫码 · 电话咨询</div>
+      <div class="phone-modal__qr">
+        <img src="assets/wechat-qrcode-xiaowan.png" alt="微信二维码" />
+      </div>
+      <p class="phone-modal__wx">长按或扫码添加微信</p>
+      <div class="phone-modal__num" id="phoneNum">18458329398</div>
+      <div class="phone-modal__actions">
+        <a class="btn btn-fill" id="phoneCall" href="tel:18458329398">立即拨打</a>
+        <button type="button" class="btn btn-line" id="phoneCopy" style="background:var(--paper);color:var(--text);border:1px solid var(--line);">复制号码</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var PHONE = "18458329398";
+      var modal = document.getElementById("phoneModal");
+      var copyBtn = document.getElementById("phoneCopy");
+
+      function openModal() {
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+      }
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      document.querySelectorAll(".js-phone").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      modal.querySelectorAll("[data-close]").forEach(function (el) {
+        el.addEventListener("click", closeModal);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+      });
+
+      copyBtn.addEventListener("click", function () {
+        function done() {
+          copyBtn.textContent = "已复制";
+          setTimeout(function () { copyBtn.textContent = "复制号码"; }, 1600);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(PHONE).then(done).catch(function () {
+            window.prompt("请手动复制号码", PHONE);
+          });
+        } else {
+          window.prompt("请手动复制号码", PHONE);
+          done();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
